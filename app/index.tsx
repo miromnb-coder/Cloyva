@@ -9,7 +9,7 @@ import { theme } from '../src/constants/theme';
 
 export default function IndexScreen() {
   return (
-    <SafeAreaView style={styles.screen}>
+    <SafeAreaView edges={['top']} style={styles.screen}>
       <Header />
       <CategoryTabs />
 
