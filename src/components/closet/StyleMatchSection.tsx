@@ -49,10 +49,10 @@ const styles = StyleSheet.create({
     marginHorizontal: 0,
     paddingHorizontal: 16,
     paddingTop: 6,
-    paddingBottom: 86,
+    paddingBottom: 170,
     backgroundColor: theme.colors.white,
-    borderBottomLeftRadius: 26,
-    borderBottomRightRadius: 26,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
   },
   headerRow: {
     height: 26,
