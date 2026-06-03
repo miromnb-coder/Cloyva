@@ -69,7 +69,7 @@ export function OutfitCard() {
 
 const styles = StyleSheet.create({
   cardWrap: {
-    height: 460,
+    height: 560,
     marginHorizontal: 22,
     marginTop: 6,
     marginBottom: 8,
