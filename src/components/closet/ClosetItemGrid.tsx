@@ -62,8 +62,8 @@ export function ClosetItemGrid() {
 
 const styles = StyleSheet.create({
   wrap: {
-    marginHorizontal: 22,
-    paddingHorizontal: 8,
+    marginHorizontal: 0,
+    paddingHorizontal: 16,
     paddingTop: 7,
     paddingBottom: 8,
     flexDirection: 'row',
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.white,
   },
   card: {
-    width: '31.8%',
+    width: '31.9%',
     aspectRatio: 0.88,
     borderRadius: 8,
     overflow: 'hidden',
