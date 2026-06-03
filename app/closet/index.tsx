@@ -1,5 +1,4 @@
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { BottomNav } from '../../src/components/BottomNav';
 import { ClosetCategories } from '../../src/components/closet/ClosetCategories';
@@ -11,7 +10,7 @@ import { theme } from '../../src/constants/theme';
 
 export default function ClosetScreen() {
   return (
-    <SafeAreaView edges={['top']} style={styles.screen}>
+    <View style={styles.screen}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
         <ClosetHeader />
         <View style={styles.panel}>
@@ -23,18 +22,19 @@ export default function ClosetScreen() {
       </ScrollView>
 
       <BottomNav />
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: theme.colors.background,
+    backgroundColor: theme.colors.white,
   },
   scrollContent: {
-    paddingTop: 4,
+    paddingTop: 0,
     paddingBottom: 92,
+    backgroundColor: theme.colors.white,
   },
   panel: {
     marginTop: -18,
