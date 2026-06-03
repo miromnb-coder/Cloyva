@@ -1,18 +1,6 @@
-import {
-  Bell,
-  CalendarDays,
-  Circle,
-  Filter,
-  Heart,
-  Home,
-  MessageCircle,
-  Plus,
-  Repeat2,
-  Send,
-  Shirt,
-  Sparkles,
-  UserRound,
-} from 'lucide-react-native';
+import Feather from '@expo/vector-icons/Feather';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { ImageBackground, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -33,10 +21,10 @@ export default function IndexScreen() {
 
         <View style={styles.headerActions}>
           <Pressable accessibilityLabel="Notifications" style={styles.headerIconButton}>
-            <Bell color={text} size={21} strokeWidth={2.15} />
+            <Feather name="bell" color={text} size={21} />
           </Pressable>
           <Pressable accessibilityLabel="Filter" style={styles.headerIconButton}>
-            <Filter color={text} size={21} strokeWidth={2.15} />
+            <Feather name="filter" color={text} size={21} />
           </Pressable>
         </View>
       </View>
@@ -74,17 +62,17 @@ export default function IndexScreen() {
 
             <View style={styles.socialActions}>
               <Pressable accessibilityLabel="Save item" style={styles.socialButton}>
-                <Heart color={text} size={25} strokeWidth={2.6} />
+                <Feather name="heart" color={text} size={25} />
               </Pressable>
               <Text style={styles.socialCount}>128</Text>
 
               <Pressable accessibilityLabel="Ask about item" style={styles.socialButton}>
-                <MessageCircle color={text} size={24} strokeWidth={2.5} />
+                <Feather name="message-circle" color={text} size={24} />
               </Pressable>
               <Text style={styles.socialCount}>24</Text>
 
               <Pressable accessibilityLabel="Share item" style={styles.socialButton}>
-                <Send color={text} size={23} strokeWidth={2.5} />
+                <Feather name="send" color={text} size={23} />
               </Pressable>
             </View>
 
@@ -102,17 +90,17 @@ export default function IndexScreen() {
 
             <View style={styles.actionRow}>
               <Pressable style={[styles.actionButton, styles.borrowButton]}>
-                <CalendarDays color="#ffffff" size={17} strokeWidth={2.5} />
+                <Feather name="calendar" color="#ffffff" size={17} />
                 <Text style={styles.borrowButtonText}>Borrow</Text>
               </Pressable>
 
               <Pressable style={[styles.actionButton, styles.buyButton]}>
-                <Repeat2 color="#ffffff" size={17} strokeWidth={2.5} />
+                <Feather name="repeat" color="#ffffff" size={17} />
                 <Text style={styles.buyButtonText}>Buy</Text>
               </Pressable>
 
               <Pressable style={[styles.actionButton, styles.swapButton]}>
-                <Repeat2 color={text} size={17} strokeWidth={2.5} />
+                <Feather name="repeat" color={text} size={17} />
                 <Text style={styles.swapButtonText}>Swap</Text>
               </Pressable>
             </View>
@@ -122,29 +110,29 @@ export default function IndexScreen() {
 
       <View style={styles.bottomNav}>
         <View style={styles.navItem}>
-          <Home color={purple} size={24} strokeWidth={2.45} />
+          <Feather name="home" color={purple} size={24} />
           <Text style={styles.activeNavText}>Feed</Text>
         </View>
 
         <View style={styles.navItem}>
-          <Sparkles color={text} size={24} strokeWidth={2.25} />
+          <Ionicons name="sparkles-outline" color={text} size={24} />
           <Text style={styles.navText}>Match</Text>
         </View>
 
         <View style={styles.addNavItem}>
           <View style={styles.addCircle}>
-            <Plus color="#ffffff" size={31} strokeWidth={2.7} />
+            <Feather name="plus" color="#ffffff" size={31} />
           </View>
           <Text style={styles.activeNavText}>Add</Text>
         </View>
 
         <View style={styles.navItem}>
-          <Shirt color={text} size={23} strokeWidth={2.2} />
+          <MaterialCommunityIcons name="hanger" color={text} size={24} />
           <Text style={styles.navText}>Closet</Text>
         </View>
 
         <View style={styles.navItem}>
-          <Circle color={text} size={25} strokeWidth={2.25} />
+          <Feather name="circle" color={text} size={25} />
           <Text style={styles.navText}>Inbox</Text>
         </View>
       </View>
