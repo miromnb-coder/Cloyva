@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.background,
   },
   content: {
-    flex: 1,
+    flexShrink: 0,
   },
 });
