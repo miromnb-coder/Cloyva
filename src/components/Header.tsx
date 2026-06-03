@@ -10,10 +10,10 @@ export function Header() {
 
       <View style={styles.headerActions}>
         <Pressable accessibilityLabel="Notifications" style={styles.headerIconButton}>
-          <Feather name="bell" color={theme.colors.text} size={19} />
+          <Feather name="bell" color={theme.colors.text} size={17} />
         </Pressable>
         <Pressable accessibilityLabel="Filter" style={styles.headerIconButton}>
-          <Feather name="filter" color={theme.colors.text} size={19} />
+          <Feather name="filter" color={theme.colors.text} size={17} />
         </Pressable>
       </View>
     </View>
@@ -22,19 +22,19 @@ export function Header() {
 
 const styles = StyleSheet.create({
   header: {
-    minHeight: 58,
+    minHeight: 48,
     paddingHorizontal: 22,
-    paddingTop: 2,
+    paddingTop: 0,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
   logo: {
     color: theme.colors.text,
-    fontSize: 39,
-    lineHeight: 45,
-    fontWeight: '900',
-    letterSpacing: -2.55,
+    fontSize: 30,
+    lineHeight: 36,
+    fontWeight: '800',
+    letterSpacing: -1.55,
   },
   headerActions: {
     flexDirection: 'row',
@@ -42,18 +42,11 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   headerIconButton: {
-    width: 42,
-    height: 42,
-    borderRadius: 21,
+    width: 31,
+    height: 31,
+    borderRadius: 15.5,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: theme.colors.white,
-    borderWidth: 1,
-    borderColor: theme.colors.border,
-    shadowColor: theme.colors.text,
-    shadowOpacity: 0.045,
-    shadowRadius: 12,
-    shadowOffset: { width: 0, height: 8 },
-    elevation: 2,
+    backgroundColor: theme.colors.background,
   },
 });
