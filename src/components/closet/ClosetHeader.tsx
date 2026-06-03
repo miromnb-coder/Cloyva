@@ -5,21 +5,25 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { theme } from '../../constants/theme';
 
+type ClosetHeaderProps = {
+  onOpenMenu?: () => void;
+};
+
 const coverImage = 'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80';
 const avatarImage = 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=85';
 
-export function ClosetHeader() {
+export function ClosetHeader({ onOpenMenu }: ClosetHeaderProps) {
   const insets = useSafeAreaInsets();
 
   return (
     <ImageBackground source={{ uri: coverImage }} resizeMode="cover" style={styles.cover} imageStyle={styles.coverImage}>
       <View style={styles.coverOverlay} />
 
-      <View style={[styles.topActions, { top: insets.top + 10 }]}>
+      <View style={[styles.topActions, { top: insets.top + 10 }]}> 
         <Pressable accessibilityLabel="Share closet" style={styles.iconButton}>
           <Feather name="share-2" color={theme.colors.text} size={16} />
         </Pressable>
-        <Pressable accessibilityLabel="Open closet menu" style={styles.iconButton}>
+        <Pressable accessibilityLabel="Open closet menu" onPress={onOpenMenu} style={styles.iconButton}>
           <Feather name="menu" color={theme.colors.text} size={18} />
         </Pressable>
       </View>
