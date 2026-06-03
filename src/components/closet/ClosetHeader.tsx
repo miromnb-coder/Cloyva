@@ -4,16 +4,26 @@ import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { theme } from '../../constants/theme';
+import { useAuth } from '../../context/AuthContext';
+import { useMyProfile } from '../../hooks/useMyProfile';
+import { getProfileDisplayUsername, getProfileLocation } from '../../services/profile';
 
 type ClosetHeaderProps = {
   onOpenMenu?: () => void;
 };
 
 const coverImage = 'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80';
-const avatarImage = 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=85';
+const fallbackAvatarImage = 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=85';
 
 export function ClosetHeader({ onOpenMenu }: ClosetHeaderProps) {
   const insets = useSafeAreaInsets();
+  const { user } = useAuth();
+  const { profile } = useMyProfile();
+  const avatarSource = { uri: profile?.avatar_url || fallbackAvatarImage };
+  const username = getProfileDisplayUsername(profile, user?.email);
+  const location = getProfileLocation(profile);
+  const rating = profile?.rating ?? 0;
+  const reviewCount = profile?.review_count ?? 0;
 
   return (
     <ImageBackground source={{ uri: coverImage }} resizeMode="cover" style={styles.cover} imageStyle={styles.coverImage}>
@@ -29,22 +39,22 @@ export function ClosetHeader({ onOpenMenu }: ClosetHeaderProps) {
       </View>
 
       <View style={styles.profileRow}>
-        <ImageBackground source={{ uri: avatarImage }} resizeMode="cover" style={styles.avatar} imageStyle={styles.avatarImage} />
+        <ImageBackground source={avatarSource} resizeMode="cover" style={styles.avatar} imageStyle={styles.avatarImage} />
 
         <View style={styles.profileInfo}>
           <View style={styles.usernameRow}>
-            <Text style={styles.username}>@its.sofia</Text>
-            <Ionicons name="checkmark-circle" color={theme.colors.purple} size={13} />
+            <Text style={styles.username}>{username}</Text>
+            {profile?.is_verified ? <Ionicons name="checkmark-circle" color={theme.colors.purple} size={13} /> : null}
           </View>
 
           <View style={styles.metaRow}>
             <Text style={styles.star}>★</Text>
-            <Text style={styles.metaText}>4.8 (126)</Text>
+            <Text style={styles.metaText}>{rating.toFixed(1)} ({reviewCount})</Text>
           </View>
 
           <View style={styles.metaRow}>
             <Feather name="map-pin" color={theme.colors.text} size={10} />
-            <Text style={styles.metaText}>Berlin, Germany</Text>
+            <Text style={styles.metaText}>{location}</Text>
           </View>
 
           <Pressable style={styles.editButton}>
