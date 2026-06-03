@@ -1,42 +1,48 @@
 import Feather from '@expo/vector-icons/Feather';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { StyleSheet, Text, View } from 'react-native';
+import { usePathname, useRouter } from 'expo-router';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { theme } from '../constants/theme';
 
 export function BottomNav() {
   const insets = useSafeAreaInsets();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const isFeedActive = pathname === '/';
+  const isClosetActive = pathname.startsWith('/closet');
 
   return (
     <View style={[styles.bottomNav, { paddingBottom: Math.max(insets.bottom, 6) }]}>
-      <View style={styles.navItem}>
-        <Feather name="home" color={theme.colors.purple} size={18} />
-        <Text style={styles.activeNavText}>Feed</Text>
-      </View>
+      <Pressable accessibilityLabel="Open feed" onPress={() => router.push('/')} style={styles.navItem}>
+        <Feather name="home" color={isFeedActive ? theme.colors.purple : theme.colors.text} size={18} />
+        <Text style={isFeedActive ? styles.activeNavText : styles.navText}>Feed</Text>
+      </Pressable>
 
-      <View style={styles.navItem}>
+      <Pressable accessibilityLabel="Open match" style={styles.navItem}>
         <Ionicons name="sparkles-outline" color={theme.colors.text} size={18} />
         <Text style={styles.navText}>Match</Text>
-      </View>
+      </Pressable>
 
-      <View style={styles.addNavItem}>
+      <Pressable accessibilityLabel="Add item" style={styles.addNavItem}>
         <View style={styles.addCircle}>
           <Feather name="plus" color={theme.colors.white} size={21} />
         </View>
         <Text style={styles.activeNavText}>Add</Text>
-      </View>
+      </Pressable>
 
-      <View style={styles.navItem}>
-        <MaterialCommunityIcons name="hanger" color={theme.colors.text} size={19} />
-        <Text style={styles.navText}>Closet</Text>
-      </View>
+      <Pressable accessibilityLabel="Open closet" onPress={() => router.push('/closet')} style={styles.navItem}>
+        <MaterialCommunityIcons name="hanger" color={isClosetActive ? theme.colors.purple : theme.colors.text} size={19} />
+        <Text style={isClosetActive ? styles.activeNavText : styles.navText}>Closet</Text>
+      </Pressable>
 
-      <View style={styles.navItem}>
+      <Pressable accessibilityLabel="Open inbox" style={styles.navItem}>
         <Feather name="circle" color={theme.colors.text} size={19} />
         <Text style={styles.navText}>Inbox</Text>
-      </View>
+      </Pressable>
     </View>
   );
 }
