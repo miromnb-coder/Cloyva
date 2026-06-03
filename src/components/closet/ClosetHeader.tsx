@@ -4,7 +4,7 @@ import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native
 
 import { theme } from '../../constants/theme';
 
-const coverImage = 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=900&q=80';
+const coverImage = 'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80';
 const avatarImage = 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=85';
 
 export function ClosetHeader() {
@@ -14,10 +14,10 @@ export function ClosetHeader() {
 
       <View style={styles.topActions}>
         <Pressable accessibilityLabel="Share closet" style={styles.iconButton}>
-          <Feather name="share" color={theme.colors.text} size={18} />
+          <Feather name="share-2" color={theme.colors.text} size={16} />
         </Pressable>
         <Pressable accessibilityLabel="Open closet menu" style={styles.iconButton}>
-          <Feather name="menu" color={theme.colors.text} size={19} />
+          <Feather name="menu" color={theme.colors.text} size={18} />
         </Pressable>
       </View>
 
@@ -27,7 +27,7 @@ export function ClosetHeader() {
         <View style={styles.profileInfo}>
           <View style={styles.usernameRow}>
             <Text style={styles.username}>@its.sofia</Text>
-            <Ionicons name="checkmark-circle" color={theme.colors.purple} size={15} />
+            <Ionicons name="checkmark-circle" color={theme.colors.purple} size={13} />
           </View>
 
           <View style={styles.metaRow}>
@@ -36,13 +36,13 @@ export function ClosetHeader() {
           </View>
 
           <View style={styles.metaRow}>
-            <Feather name="map-pin" color={theme.colors.text} size={11} />
+            <Feather name="map-pin" color={theme.colors.text} size={10} />
             <Text style={styles.metaText}>Berlin, Germany</Text>
           </View>
 
           <Pressable style={styles.editButton}>
             <Text style={styles.editText}>Edit Closet</Text>
-            <Feather name="edit-2" color="#777777" size={10} />
+            <Feather name="edit-2" color="#777777" size={9} />
           </Pressable>
         </View>
       </View>
@@ -52,60 +52,60 @@ export function ClosetHeader() {
 
 const styles = StyleSheet.create({
   cover: {
-    height: 172,
-    marginHorizontal: 14,
+    height: 154,
+    marginHorizontal: 22,
     marginTop: 4,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
+    borderTopLeftRadius: 22,
+    borderTopRightRadius: 22,
     overflow: 'hidden',
   },
   coverImage: {
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
+    borderTopLeftRadius: 22,
+    borderTopRightRadius: 22,
   },
   coverOverlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(255,255,255,0.50)',
+    backgroundColor: 'rgba(255,255,255,0.48)',
   },
   topActions: {
     position: 'absolute',
-    top: 12,
-    right: 13,
+    top: 11,
+    right: 12,
     flexDirection: 'row',
-    gap: 10,
+    gap: 8,
   },
   iconButton: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
+    width: 27,
+    height: 27,
+    borderRadius: 13.5,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(255,255,255,0.50)',
+    backgroundColor: 'rgba(255,255,255,0.58)',
   },
   profileRow: {
     position: 'absolute',
-    left: 16,
-    right: 16,
-    bottom: 14,
+    left: 14,
+    right: 14,
+    bottom: 12,
     flexDirection: 'row',
     alignItems: 'flex-start',
   },
   avatar: {
-    width: 78,
-    height: 78,
-    borderRadius: 39,
+    width: 66,
+    height: 66,
+    borderRadius: 33,
     overflow: 'hidden',
     borderWidth: 3,
     borderColor: theme.colors.white,
     backgroundColor: '#dddddd',
   },
   avatarImage: {
-    borderRadius: 39,
+    borderRadius: 33,
   },
   profileInfo: {
     flex: 1,
-    marginLeft: 12,
-    paddingTop: 9,
+    marginLeft: 11,
+    paddingTop: 6,
   },
   usernameRow: {
     flexDirection: 'row',
@@ -114,41 +114,41 @@ const styles = StyleSheet.create({
   },
   username: {
     color: theme.colors.text,
-    fontSize: 15,
+    fontSize: 13.5,
     fontWeight: '900',
     letterSpacing: -0.25,
   },
   metaRow: {
-    marginTop: 3,
+    marginTop: 2,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
   },
   star: {
     color: '#f7b500',
-    fontSize: 11,
+    fontSize: 10.5,
     fontWeight: '900',
   },
   metaText: {
     color: theme.colors.text,
-    fontSize: 10.5,
+    fontSize: 9.6,
     fontWeight: '700',
   },
   editButton: {
-    marginTop: 9,
-    height: 26,
-    maxWidth: 178,
-    borderRadius: 8,
+    marginTop: 8,
+    height: 24,
+    maxWidth: 166,
+    borderRadius: 7,
     paddingHorizontal: 12,
     flexDirection: 'row',
-    gap: 7,
+    gap: 6,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: theme.colors.white,
   },
   editText: {
     color: theme.colors.text,
-    fontSize: 10.5,
+    fontSize: 9.7,
     fontWeight: '800',
   },
 });
