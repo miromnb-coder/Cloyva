@@ -46,13 +46,13 @@ export function StyleMatchSection() {
 
 const styles = StyleSheet.create({
   wrap: {
-    marginHorizontal: 22,
-    paddingHorizontal: 10,
+    marginHorizontal: 0,
+    paddingHorizontal: 16,
     paddingTop: 6,
     paddingBottom: 86,
     backgroundColor: theme.colors.white,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 26,
+    borderBottomRightRadius: 26,
   },
   headerRow: {
     height: 26,
