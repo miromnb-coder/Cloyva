@@ -23,7 +23,7 @@ export function StyleMatchSection() {
     <View style={styles.wrap}>
       <View style={styles.headerRow}>
         <View style={styles.titleRow}>
-          <Feather name="zap" color={theme.colors.purple} size={13} />
+          <Feather name="zap" color={theme.colors.purple} size={12} />
           <Text style={styles.title}>Style Match</Text>
         </View>
         <Text style={styles.seeAll}>See all</Text>
@@ -46,16 +46,16 @@ export function StyleMatchSection() {
 
 const styles = StyleSheet.create({
   wrap: {
-    marginHorizontal: 14,
-    paddingHorizontal: 12,
-    paddingTop: 7,
-    paddingBottom: 84,
+    marginHorizontal: 22,
+    paddingHorizontal: 10,
+    paddingTop: 6,
+    paddingBottom: 86,
     backgroundColor: theme.colors.white,
-    borderBottomLeftRadius: 22,
-    borderBottomRightRadius: 22,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
   headerRow: {
-    height: 28,
+    height: 26,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -67,23 +67,23 @@ const styles = StyleSheet.create({
   },
   title: {
     color: theme.colors.text,
-    fontSize: 12,
+    fontSize: 11.5,
     fontWeight: '900',
     letterSpacing: -0.2,
   },
   seeAll: {
     color: theme.colors.purple,
-    fontSize: 9.5,
+    fontSize: 9.2,
     fontWeight: '800',
   },
   cardsRow: {
     flexDirection: 'row',
-    gap: 8,
+    gap: 7,
   },
   card: {
     flex: 1,
-    height: 64,
-    borderRadius: 9,
+    height: 56,
+    borderRadius: 8,
     overflow: 'hidden',
     backgroundColor: '#ededed',
   },
@@ -91,14 +91,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   imageRadius: {
-    borderRadius: 9,
+    borderRadius: 8,
   },
   badge: {
     position: 'absolute',
     left: 4,
     bottom: 4,
-    height: 16,
-    borderRadius: 6,
+    height: 15,
+    borderRadius: 5,
     paddingHorizontal: 5,
     alignItems: 'center',
     justifyContent: 'center',
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   },
   badgeText: {
     color: theme.colors.white,
-    fontSize: 7,
+    fontSize: 6.6,
     fontWeight: '900',
   },
 });
