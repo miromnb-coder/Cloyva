@@ -1,29 +1,62 @@
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { BottomNav } from '../../src/components/BottomNav';
 import { AddItemHeader } from '../../src/components/add/AddItemHeader';
-import { BasicDetailsSection } from '../../src/components/add/BasicDetailsSection';
+import { BasicDetailsSection, type ItemCondition, type ItemSize } from '../../src/components/add/BasicDetailsSection';
 import { ExtraDetailsSection } from '../../src/components/add/ExtraDetailsSection';
-import { ListingOptionsSection } from '../../src/components/add/ListingOptionsSection';
+import { ListingOptionsSection, type ListingOption } from '../../src/components/add/ListingOptionsSection';
 import { PhotoUploadSection } from '../../src/components/add/PhotoUploadSection';
 import { PricingSection } from '../../src/components/add/PricingSection';
 import { theme } from '../../src/constants/theme';
 
 export default function AddItemScreen() {
+  const [selectedSize, setSelectedSize] = useState<ItemSize>('M');
+  const [selectedCondition, setSelectedCondition] = useState<ItemCondition>('Like New');
+  const [selectedOptions, setSelectedOptions] = useState<ListingOption[]>(['borrow', 'sell']);
+
+  const toggleListingOption = (option: ListingOption) => {
+    setSelectedOptions((currentOptions) => {
+      const isSelected = currentOptions.includes(option);
+
+      if (isSelected && currentOptions.length === 1) {
+        return currentOptions;
+      }
+
+      if (isSelected) {
+        return currentOptions.filter((currentOption) => currentOption !== option);
+      }
+
+      return [...currentOptions, option];
+    });
+  };
+
+  const publishItem = () => {
+    Alert.alert(
+      'Item published',
+      `Vintage Varsity Jacket is now listed as ${selectedOptions.join(', ')}. Size: ${selectedSize}. Condition: ${selectedCondition}.`,
+    );
+  };
+
   return (
     <SafeAreaView edges={['top']} style={styles.screen}>
       <AddItemHeader />
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
         <PhotoUploadSection />
-        <BasicDetailsSection />
-        <ListingOptionsSection />
+        <BasicDetailsSection
+          selectedSize={selectedSize}
+          onSelectSize={setSelectedSize}
+          selectedCondition={selectedCondition}
+          onSelectCondition={setSelectedCondition}
+        />
+        <ListingOptionsSection selectedOptions={selectedOptions} onToggleOption={toggleListingOption} />
         <PricingSection />
         <ExtraDetailsSection />
 
         <View style={styles.publishWrap}>
-          <Pressable style={styles.publishButton}>
+          <Pressable onPress={publishItem} style={styles.publishButton}>
             <Text style={styles.publishText}>Publish Item</Text>
           </Pressable>
         </View>
