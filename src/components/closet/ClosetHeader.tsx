@@ -1,6 +1,7 @@
 import Feather from '@expo/vector-icons/Feather';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { ImageBackground, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { theme } from '../../constants/theme';
 
@@ -8,11 +9,13 @@ const coverImage = 'https://images.unsplash.com/photo-1494526585095-c41746248156
 const avatarImage = 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=85';
 
 export function ClosetHeader() {
+  const insets = useSafeAreaInsets();
+
   return (
     <ImageBackground source={{ uri: coverImage }} resizeMode="cover" style={styles.cover} imageStyle={styles.coverImage}>
       <View style={styles.coverOverlay} />
 
-      <View style={styles.topActions}>
+      <View style={[styles.topActions, { top: insets.top + 10 }]}>
         <Pressable accessibilityLabel="Share closet" style={styles.iconButton}>
           <Feather name="share-2" color={theme.colors.text} size={16} />
         </Pressable>
@@ -52,9 +55,9 @@ export function ClosetHeader() {
 
 const styles = StyleSheet.create({
   cover: {
-    height: 154,
+    height: 170,
     marginHorizontal: 0,
-    marginTop: 4,
+    marginTop: 0,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
     overflow: 'hidden',
@@ -69,24 +72,23 @@ const styles = StyleSheet.create({
   },
   topActions: {
     position: 'absolute',
-    top: 11,
-    right: 16,
+    right: 18,
     flexDirection: 'row',
     gap: 8,
   },
   iconButton: {
-    width: 27,
-    height: 27,
-    borderRadius: 13.5,
+    width: 29,
+    height: 29,
+    borderRadius: 14.5,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(255,255,255,0.58)',
+    backgroundColor: 'rgba(255,255,255,0.70)',
   },
   profileRow: {
     position: 'absolute',
     left: 18,
     right: 18,
-    bottom: 12,
+    bottom: 18,
     flexDirection: 'row',
     alignItems: 'flex-start',
   },
