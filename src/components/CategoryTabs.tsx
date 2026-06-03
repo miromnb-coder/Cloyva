@@ -25,15 +25,15 @@ const styles = StyleSheet.create({
     flexGrow: 0,
   },
   tabs: {
-    height: 42,
+    height: 35,
     paddingHorizontal: 22,
-    gap: 11,
+    gap: 12,
     alignItems: 'center',
   },
   tab: {
-    height: 31,
-    paddingHorizontal: 14,
-    borderRadius: 16,
+    height: 28,
+    paddingHorizontal: 12,
+    borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -42,12 +42,12 @@ const styles = StyleSheet.create({
   },
   tabText: {
     color: theme.colors.mutedText,
-    fontSize: 12.5,
-    fontWeight: '700',
-    letterSpacing: -0.15,
+    fontSize: 10.5,
+    fontWeight: '600',
+    letterSpacing: -0.08,
   },
   activeTabText: {
     color: theme.colors.white,
-    fontWeight: '800',
+    fontWeight: '700',
   },
 });
