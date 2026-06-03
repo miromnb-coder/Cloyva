@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { theme } from '../../constants/theme';
 
@@ -7,24 +7,32 @@ type AuthButtonProps = {
   label: string;
   variant?: 'primary' | 'secondary';
   icon?: ReactNode;
+  isLoading?: boolean;
   onPress?: () => void;
 };
 
-export function AuthButton({ label, variant = 'primary', icon, onPress }: AuthButtonProps) {
+export function AuthButton({ label, variant = 'primary', icon, isLoading = false, onPress }: AuthButtonProps) {
   const isPrimary = variant === 'primary';
 
   return (
     <Pressable
       accessibilityRole="button"
-      onPress={onPress}
+      onPress={isLoading ? undefined : onPress}
       style={({ pressed }) => [
         styles.button,
         isPrimary ? styles.primaryButton : styles.secondaryButton,
-        pressed && styles.pressed,
+        pressed && !isLoading && styles.pressed,
+        isLoading && styles.loading,
       ]}
     >
-      {icon ? <View style={styles.iconWrap}>{icon}</View> : null}
-      <Text style={isPrimary ? styles.primaryText : styles.secondaryText}>{label}</Text>
+      {isLoading ? (
+        <ActivityIndicator color={isPrimary ? theme.colors.white : theme.colors.purple} size="small" />
+      ) : (
+        <>
+          {icon ? <View style={styles.iconWrap}>{icon}</View> : null}
+          <Text style={isPrimary ? styles.primaryText : styles.secondaryText}>{label}</Text>
+        </>
+      )}
     </Pressable>
   );
 }
@@ -48,6 +56,9 @@ const styles = StyleSheet.create({
   pressed: {
     opacity: 0.84,
     transform: [{ scale: 0.995 }],
+  },
+  loading: {
+    opacity: 0.72,
   },
   iconWrap: {
     position: 'absolute',
