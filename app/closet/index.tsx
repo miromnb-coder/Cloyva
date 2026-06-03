@@ -11,14 +11,16 @@ import { theme } from '../../src/constants/theme';
 export default function ClosetScreen() {
   return (
     <View style={styles.screen}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
-        <ClosetHeader />
-        <View style={styles.panel}>
-          <ClosetTabs />
-          <ClosetCategories />
-          <ClosetItemGrid />
-          <StyleMatchSection />
-        </View>
+      <ClosetHeader />
+
+      <View style={styles.panel}>
+        <ClosetTabs />
+        <ClosetCategories />
+      </View>
+
+      <ScrollView style={styles.itemsScroll} showsVerticalScrollIndicator={false} contentContainerStyle={styles.itemsScrollContent}>
+        <ClosetItemGrid />
+        <StyleMatchSection />
       </ScrollView>
 
       <BottomNav />
@@ -31,12 +33,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.colors.white,
   },
-  scrollContent: {
-    paddingTop: 0,
-    paddingBottom: 92,
-    backgroundColor: theme.colors.white,
-  },
   panel: {
     marginTop: -18,
+    zIndex: 2,
+  },
+  itemsScroll: {
+    flex: 1,
+    backgroundColor: theme.colors.white,
+  },
+  itemsScrollContent: {
+    paddingBottom: 92,
+    backgroundColor: theme.colors.white,
   },
 });
