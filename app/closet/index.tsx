@@ -1,17 +1,21 @@
+import { useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 
 import { BottomNav } from '../../src/components/BottomNav';
 import { ClosetCategories } from '../../src/components/closet/ClosetCategories';
 import { ClosetHeader } from '../../src/components/closet/ClosetHeader';
 import { ClosetItemGrid } from '../../src/components/closet/ClosetItemGrid';
+import { ClosetMenuSheet } from '../../src/components/closet/ClosetMenuSheet';
 import { ClosetTabs } from '../../src/components/closet/ClosetTabs';
 import { StyleMatchSection } from '../../src/components/closet/StyleMatchSection';
 import { theme } from '../../src/constants/theme';
 
 export default function ClosetScreen() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <View style={styles.screen}>
-      <ClosetHeader />
+      <ClosetHeader onOpenMenu={() => setIsMenuOpen(true)} />
 
       <View style={styles.panel}>
         <ClosetTabs />
@@ -24,6 +28,7 @@ export default function ClosetScreen() {
       </ScrollView>
 
       <BottomNav />
+      <ClosetMenuSheet visible={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </View>
   );
 }
