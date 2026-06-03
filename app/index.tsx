@@ -110,29 +110,29 @@ export default function IndexScreen() {
 
       <View style={styles.bottomNav}>
         <View style={styles.navItem}>
-          <Feather name="home" color={purple} size={24} />
+          <Feather name="home" color={purple} size={20} />
           <Text style={styles.activeNavText}>Feed</Text>
         </View>
 
         <View style={styles.navItem}>
-          <Ionicons name="sparkles-outline" color={text} size={24} />
+          <Ionicons name="sparkles-outline" color={text} size={20} />
           <Text style={styles.navText}>Match</Text>
         </View>
 
         <View style={styles.addNavItem}>
           <View style={styles.addCircle}>
-            <Feather name="plus" color="#ffffff" size={31} />
+            <Feather name="plus" color="#ffffff" size={24} />
           </View>
           <Text style={styles.activeNavText}>Add</Text>
         </View>
 
         <View style={styles.navItem}>
-          <MaterialCommunityIcons name="hanger" color={text} size={24} />
+          <MaterialCommunityIcons name="hanger" color={text} size={21} />
           <Text style={styles.navText}>Closet</Text>
         </View>
 
         <View style={styles.navItem}>
-          <Feather name="circle" color={text} size={25} />
+          <Feather name="circle" color={text} size={21} />
           <Text style={styles.navText}>Inbox</Text>
         </View>
       </View>
@@ -403,10 +403,10 @@ const styles = StyleSheet.create({
     letterSpacing: -0.25,
   },
   bottomNav: {
-    minHeight: 86,
-    paddingHorizontal: 18,
-    paddingTop: 11,
-    paddingBottom: 13,
+    minHeight: 69,
+    paddingHorizontal: 26,
+    paddingTop: 8,
+    paddingBottom: 8,
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
@@ -415,34 +415,38 @@ const styles = StyleSheet.create({
     borderTopColor: '#efefef',
   },
   navItem: {
-    width: 58,
+    width: 47,
+    minHeight: 48,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   addNavItem: {
-    width: 58,
+    width: 47,
+    minHeight: 52,
     alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: -5,
+    justifyContent: 'flex-start',
+    marginTop: -1,
   },
   addCircle: {
-    width: 49,
-    height: 49,
-    borderRadius: 24.5,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: purple,
   },
   navText: {
-    marginTop: 5,
-    color: '#4f4f4f',
-    fontSize: 11.5,
-    fontWeight: '800',
+    marginTop: 2,
+    color: '#444444',
+    fontSize: 9.5,
+    lineHeight: 12,
+    fontWeight: '700',
   },
   activeNavText: {
-    marginTop: 5,
+    marginTop: 2,
     color: purple,
-    fontSize: 11.5,
-    fontWeight: '900',
+    fontSize: 9.5,
+    lineHeight: 12,
+    fontWeight: '800',
   },
 });
