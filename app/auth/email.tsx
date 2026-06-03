@@ -1,5 +1,5 @@
 import Feather from '@expo/vector-icons/Feather';
-import { Image, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 
@@ -14,7 +14,7 @@ export default function AuthEmailScreen() {
 
   return (
     <SafeAreaView style={styles.screen} edges={['top', 'bottom']}>
-      <ScrollView keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false} contentContainerStyle={styles.content}>
+      <View style={styles.content}>
         <Pressable accessibilityLabel="Go back" onPress={() => router.back()} style={styles.backButton}>
           <Feather name="arrow-left" color={theme.colors.text} size={24} />
         </Pressable>
@@ -83,7 +83,7 @@ export default function AuthEmailScreen() {
         </View>
 
         <AuthFooter />
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }
@@ -94,59 +94,59 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.white,
   },
   content: {
-    flexGrow: 1,
+    flex: 1,
     paddingHorizontal: 24,
-    paddingTop: 13,
-    paddingBottom: 18,
+    paddingTop: 7,
+    paddingBottom: 5,
     backgroundColor: theme.colors.white,
   },
   backButton: {
     width: 38,
-    height: 38,
+    height: 32,
     alignItems: 'flex-start',
     justifyContent: 'center',
   },
   headerCopy: {
     alignItems: 'center',
-    paddingTop: 12,
-    paddingBottom: 25,
+    paddingTop: 9,
+    paddingBottom: 17,
   },
   title: {
     color: theme.colors.text,
-    fontSize: 28,
-    lineHeight: 34,
+    fontSize: 27,
+    lineHeight: 32,
     fontWeight: '900',
     letterSpacing: -1.1,
     textAlign: 'center',
   },
   subtitle: {
     color: theme.colors.mutedText,
-    fontSize: 16,
-    lineHeight: 22,
+    fontSize: 15.4,
+    lineHeight: 20,
     fontWeight: '500',
     textAlign: 'center',
   },
   heroImage: {
     width: '100%',
-    height: 163,
+    height: 145,
     borderRadius: 18,
     backgroundColor: '#f4f3f1',
   },
   form: {
-    paddingTop: 25,
+    paddingTop: 19,
   },
   fieldGroup: {
-    marginBottom: 20,
+    marginBottom: 15,
   },
   label: {
-    marginBottom: 8,
+    marginBottom: 7,
     color: '#4a4a50',
-    fontSize: 14.5,
-    lineHeight: 18,
+    fontSize: 14.2,
+    lineHeight: 17,
     fontWeight: '600',
   },
   input: {
-    height: 48,
+    height: 45,
     paddingHorizontal: 16,
     borderRadius: 14,
     borderWidth: 1,
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   passwordInputWrap: {
-    height: 48,
+    height: 45,
     paddingLeft: 16,
     paddingRight: 16,
     borderRadius: 14,
@@ -175,18 +175,18 @@ const styles = StyleSheet.create({
   },
   forgotWrap: {
     alignItems: 'flex-end',
-    marginTop: -8,
+    marginTop: -6,
   },
   forgotText: {
     color: theme.colors.purple,
-    fontSize: 14.5,
+    fontSize: 14.3,
     fontWeight: '700',
   },
   keepRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 11,
-    paddingTop: 20,
+    paddingTop: 16,
   },
   checkbox: {
     width: 20,
@@ -198,18 +198,18 @@ const styles = StyleSheet.create({
   },
   keepText: {
     color: '#4f4f55',
-    fontSize: 14.3,
+    fontSize: 14.2,
     fontWeight: '500',
   },
   actions: {
-    gap: 14,
-    paddingTop: 27,
+    gap: 12,
+    paddingTop: 22,
   },
   dividerWrap: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 16,
-    paddingTop: 23,
+    paddingTop: 20,
   },
   dividerLine: {
     flex: 1,
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
   },
   signInWrap: {
     alignItems: 'center',
-    paddingTop: 20,
+    paddingTop: 17,
   },
   signInText: {
     color: '#77777c',
