@@ -1,16 +1,63 @@
 import Feather from '@expo/vector-icons/Feather';
-import { Image, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Alert, Image, Keyboard, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 
 import { AuthButton } from '../../src/components/auth/AuthButton';
 import { AuthFooter } from '../../src/components/auth/AuthFooter';
 import { theme } from '../../src/constants/theme';
+import { useAuth } from '../../src/context/AuthContext';
+import { continueWithEmailPassword, sendMagicLink } from '../../src/services/auth';
 
 const authEmailHero = require('../../assets/images/auth-email-hero.PNG');
 
 export default function AuthEmailScreen() {
   const router = useRouter();
+  const { session } = useAuth();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [loadingAction, setLoadingAction] = useState<'continue' | 'magic-link' | null>(null);
+
+  useEffect(() => {
+    if (session) {
+      router.replace('/feed');
+    }
+  }, [router, session]);
+
+  const handleContinue = async () => {
+    Keyboard.dismiss();
+    setLoadingAction('continue');
+
+    try {
+      const result = await continueWithEmailPassword(email, password);
+
+      Alert.alert(result.title, result.message);
+
+      if (result.title !== 'Check your email') {
+        router.replace('/feed');
+      }
+    } catch (error) {
+      Alert.alert('Could not continue', error instanceof Error ? error.message : 'Please try again.');
+    } finally {
+      setLoadingAction(null);
+    }
+  };
+
+  const handleMagicLink = async () => {
+    Keyboard.dismiss();
+    setLoadingAction('magic-link');
+
+    try {
+      const result = await sendMagicLink(email);
+      Alert.alert(result.title, result.message);
+    } catch (error) {
+      Alert.alert('Could not send magic link', error instanceof Error ? error.message : 'Please try again.');
+    } finally {
+      setLoadingAction(null);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.screen} edges={['top', 'bottom']}>
@@ -34,10 +81,13 @@ export default function AuthEmailScreen() {
               autoCapitalize="none"
               autoCorrect={false}
               keyboardType="email-address"
+              onChangeText={setEmail}
               placeholder="you@example.com"
               placeholderTextColor="#74747a"
+              returnKeyType="next"
               style={styles.input}
               textContentType="emailAddress"
+              value={email}
             />
           </View>
 
@@ -45,17 +95,22 @@ export default function AuthEmailScreen() {
             <Text style={styles.label}>Password</Text>
             <View style={styles.passwordInputWrap}>
               <TextInput
+                onChangeText={setPassword}
                 placeholder="••••••••••••"
                 placeholderTextColor="#313136"
-                secureTextEntry
+                returnKeyType="done"
+                secureTextEntry={!isPasswordVisible}
                 style={styles.passwordInput}
                 textContentType="password"
+                value={password}
               />
-              <Feather name="eye" color="#77777c" size={21} />
+              <Pressable accessibilityLabel="Toggle password visibility" onPress={() => setIsPasswordVisible((current) => !current)}>
+                <Feather name={isPasswordVisible ? 'eye-off' : 'eye'} color="#77777c" size={21} />
+              </Pressable>
             </View>
           </View>
 
-          <Pressable style={styles.forgotWrap}>
+          <Pressable onPress={handleMagicLink} style={styles.forgotWrap}>
             <Text style={styles.forgotText}>Forgot password?</Text>
           </Pressable>
 
@@ -68,8 +123,14 @@ export default function AuthEmailScreen() {
         </View>
 
         <View style={styles.actions}>
-          <AuthButton label="Continue" />
-          <AuthButton label="Send magic link" variant="secondary" icon={<Feather name="mail" color={theme.colors.text} size={24} />} />
+          <AuthButton label="Continue" isLoading={loadingAction === 'continue'} onPress={handleContinue} />
+          <AuthButton
+            label="Send magic link"
+            variant="secondary"
+            isLoading={loadingAction === 'magic-link'}
+            onPress={handleMagicLink}
+            icon={<Feather name="mail" color={theme.colors.text} size={24} />}
+          />
         </View>
 
         <View style={styles.dividerWrap}>
