@@ -69,12 +69,10 @@ export function OutfitCard() {
 
 const styles = StyleSheet.create({
   cardWrap: {
-    flex: 1,
+    height: 460,
     marginHorizontal: 22,
     marginTop: 6,
-    marginBottom: 10,
-    minHeight: 420,
-    maxHeight: 505,
+    marginBottom: 8,
     borderRadius: 22,
     overflow: 'hidden',
     backgroundColor: '#dedede',
