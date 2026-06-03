@@ -19,6 +19,22 @@ After editing `.env`, restart Expo with:
 npm run start:clear
 ```
 
+## Auth redirect URLs
+
+Magic links use this in-app callback route:
+
+```text
+/auth/callback
+```
+
+For a native Expo build, allow this redirect URL in Supabase Auth settings:
+
+```text
+cloyva://auth/callback
+```
+
+For Expo Go / tunnel development, the callback URL can change because it includes the current Expo development host. If a magic link says the redirect URL is not allowed, copy the exact callback URL from the app logs or temporarily test with email/password first.
+
 ## Client import
 
 Use this import anywhere in the app:
