@@ -1,0 +1,83 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Cloyva: install dependencies",
+      "type": "shell",
+      "command": "npm install",
+      "group": "build",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "Cloyva: start Expo tunnel",
+      "type": "shell",
+      "command": "npx expo start --tunnel",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "Cloyva: start Expo web",
+      "type": "shell",
+      "command": "npm run web",
+      "group": "build",
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "Cloyva: start Expo clear cache",
+      "type": "shell",
+      "command": "npm run start:clear",
+      "group": "build",
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      }
+    },
+    {
+      "label": "Cloyva: typecheck",
+      "type": "shell",
+      "command": "npm run typecheck",
+      "group": "test",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    },
+    {
+      "label": "Cloyva: Expo doctor",
+      "type": "shell",
+      "command": "npx expo-doctor",
+      "group": "test",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared",
+        "clear": true
+      }
+    }
+  ]
+}
