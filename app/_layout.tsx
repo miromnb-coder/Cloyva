@@ -1,5 +1,11 @@
 import { Stack } from 'expo-router';
 
+import { AppImagePreloadGate } from '../src/components/AppImagePreloadGate';
+
 export default function RootLayout() {
-  return <Stack screenOptions={{ headerShown: false }} />;
+  return (
+    <AppImagePreloadGate>
+      <Stack screenOptions={{ headerShown: false }} />
+    </AppImagePreloadGate>
+  );
 }
