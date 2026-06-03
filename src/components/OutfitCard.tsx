@@ -5,7 +5,7 @@ import { theme } from '../constants/theme';
 import { ActionButton } from './ActionButton';
 
 const outfitImage =
-  'https://images.unsplash.com/photo-1506629905607-d9f297d44f60?auto=format&fit=crop&w=900&q=90';
+  'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=90';
 
 export function OutfitCard() {
   return (
