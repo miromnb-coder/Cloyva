@@ -23,27 +23,27 @@ export function ClosetTabs() {
 
 const styles = StyleSheet.create({
   wrap: {
-    height: 42,
-    marginHorizontal: 14,
+    height: 38,
+    marginHorizontal: 22,
     paddingHorizontal: 18,
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'space-between',
     backgroundColor: theme.colors.white,
-    borderTopLeftRadius: 22,
-    borderTopRightRadius: 22,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     borderBottomWidth: 1,
     borderBottomColor: theme.colors.border,
   },
   tab: {
-    height: 40,
-    minWidth: 54,
+    height: 36,
+    minWidth: 48,
     alignItems: 'center',
     justifyContent: 'center',
   },
   tabText: {
     color: '#555555',
-    fontSize: 10,
+    fontSize: 9.2,
     fontWeight: '700',
   },
   activeText: {
