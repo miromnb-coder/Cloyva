@@ -53,15 +53,15 @@ export function ClosetHeader() {
 const styles = StyleSheet.create({
   cover: {
     height: 154,
-    marginHorizontal: 22,
+    marginHorizontal: 0,
     marginTop: 4,
-    borderTopLeftRadius: 22,
-    borderTopRightRadius: 22,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
     overflow: 'hidden',
   },
   coverImage: {
-    borderTopLeftRadius: 22,
-    borderTopRightRadius: 22,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
   },
   coverOverlay: {
     ...StyleSheet.absoluteFillObject,
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   topActions: {
     position: 'absolute',
     top: 11,
-    right: 12,
+    right: 16,
     flexDirection: 'row',
     gap: 8,
   },
@@ -84,8 +84,8 @@ const styles = StyleSheet.create({
   },
   profileRow: {
     position: 'absolute',
-    left: 14,
-    right: 14,
+    left: 18,
+    right: 18,
     bottom: 12,
     flexDirection: 'row',
     alignItems: 'flex-start',
