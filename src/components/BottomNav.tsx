@@ -2,12 +2,15 @@ import Feather from '@expo/vector-icons/Feather';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { StyleSheet, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { theme } from '../constants/theme';
 
 export function BottomNav() {
+  const insets = useSafeAreaInsets();
+
   return (
-    <View style={styles.bottomNav}>
+    <View style={[styles.bottomNav, { paddingBottom: Math.max(insets.bottom, 6) }]}>
       <View style={styles.navItem}>
         <Feather name="home" color={theme.colors.purple} size={18} />
         <Text style={styles.activeNavText}>Feed</Text>
@@ -43,7 +46,6 @@ const styles = StyleSheet.create({
     minHeight: 63,
     paddingHorizontal: 30,
     paddingTop: 7,
-    paddingBottom: 6,
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
