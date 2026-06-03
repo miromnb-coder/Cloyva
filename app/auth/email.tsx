@@ -1,6 +1,6 @@
 import Feather from '@expo/vector-icons/Feather';
 import { useEffect, useState } from 'react';
-import { Alert, Image, Keyboard, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Image, Keyboard, Pressable, StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 
@@ -61,90 +61,92 @@ export default function AuthEmailScreen() {
 
   return (
     <SafeAreaView style={styles.screen} edges={['top', 'bottom']}>
-      <View style={styles.content}>
-        <Pressable accessibilityLabel="Go back" onPress={() => router.back()} style={styles.backButton}>
-          <Feather name="arrow-left" color={theme.colors.text} size={24} />
-        </Pressable>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <View style={styles.content}>
+          <Pressable accessibilityLabel="Go back" onPress={() => router.back()} style={styles.backButton}>
+            <Feather name="arrow-left" color={theme.colors.text} size={24} />
+          </Pressable>
 
-        <View style={styles.headerCopy}>
-          <Text style={styles.title}>Continue with Email</Text>
-          <Text style={styles.subtitle}>Sign in or create your account to start</Text>
-          <Text style={styles.subtitle}>borrowing, buying, and swapping.</Text>
-        </View>
+          <View style={styles.headerCopy}>
+            <Text style={styles.title}>Continue with Email</Text>
+            <Text style={styles.subtitle}>Sign in or create your account to start</Text>
+            <Text style={styles.subtitle}>borrowing, buying, and swapping.</Text>
+          </View>
 
-        <Image source={authEmailHero} resizeMode="cover" style={styles.heroImage} />
+          <Image source={authEmailHero} resizeMode="cover" style={styles.heroImage} />
 
-        <View style={styles.form}>
-          <View style={styles.fieldGroup}>
-            <Text style={styles.label}>Email</Text>
-            <TextInput
-              autoCapitalize="none"
-              autoCorrect={false}
-              keyboardType="email-address"
-              onChangeText={setEmail}
-              placeholder="you@example.com"
-              placeholderTextColor="#74747a"
-              returnKeyType="next"
-              style={styles.input}
-              textContentType="emailAddress"
-              value={email}
+          <View style={styles.form}>
+            <View style={styles.fieldGroup}>
+              <Text style={styles.label}>Email</Text>
+              <TextInput
+                autoCapitalize="none"
+                autoCorrect={false}
+                keyboardType="email-address"
+                onChangeText={setEmail}
+                placeholder="you@example.com"
+                placeholderTextColor="#74747a"
+                returnKeyType="next"
+                style={styles.input}
+                textContentType="emailAddress"
+                value={email}
+              />
+            </View>
+
+            <View style={styles.fieldGroup}>
+              <Text style={styles.label}>Password</Text>
+              <View style={styles.passwordInputWrap}>
+                <TextInput
+                  onChangeText={setPassword}
+                  placeholder="••••••••••••"
+                  placeholderTextColor="#313136"
+                  returnKeyType="done"
+                  secureTextEntry={!isPasswordVisible}
+                  style={styles.passwordInput}
+                  textContentType="password"
+                  value={password}
+                />
+                <Pressable accessibilityLabel="Toggle password visibility" onPress={() => setIsPasswordVisible((current) => !current)}>
+                  <Feather name={isPasswordVisible ? 'eye-off' : 'eye'} color="#77777c" size={21} />
+                </Pressable>
+              </View>
+            </View>
+
+            <Pressable onPress={handleMagicLink} style={styles.forgotWrap}>
+              <Text style={styles.forgotText}>Forgot password?</Text>
+            </Pressable>
+
+            <View style={styles.keepRow}>
+              <View style={styles.checkbox}>
+                <Feather name="check" color={theme.colors.white} size={15} />
+              </View>
+              <Text style={styles.keepText}>Keep me signed in</Text>
+            </View>
+          </View>
+
+          <View style={styles.actions}>
+            <AuthButton label="Continue" isLoading={loadingAction === 'continue'} onPress={handleContinue} />
+            <AuthButton
+              label="Send magic link"
+              variant="secondary"
+              isLoading={loadingAction === 'magic-link'}
+              onPress={handleMagicLink}
+              icon={<Feather name="mail" color={theme.colors.text} size={24} />}
             />
           </View>
 
-          <View style={styles.fieldGroup}>
-            <Text style={styles.label}>Password</Text>
-            <View style={styles.passwordInputWrap}>
-              <TextInput
-                onChangeText={setPassword}
-                placeholder="••••••••••••"
-                placeholderTextColor="#313136"
-                returnKeyType="done"
-                secureTextEntry={!isPasswordVisible}
-                style={styles.passwordInput}
-                textContentType="password"
-                value={password}
-              />
-              <Pressable accessibilityLabel="Toggle password visibility" onPress={() => setIsPasswordVisible((current) => !current)}>
-                <Feather name={isPasswordVisible ? 'eye-off' : 'eye'} color="#77777c" size={21} />
-              </Pressable>
-            </View>
+          <View style={styles.dividerWrap}>
+            <View style={styles.dividerLine} />
+            <Text style={styles.dividerText}>or</Text>
+            <View style={styles.dividerLine} />
           </View>
 
-          <Pressable onPress={handleMagicLink} style={styles.forgotWrap}>
-            <Text style={styles.forgotText}>Forgot password?</Text>
-          </Pressable>
-
-          <View style={styles.keepRow}>
-            <View style={styles.checkbox}>
-              <Feather name="check" color={theme.colors.white} size={15} />
-            </View>
-            <Text style={styles.keepText}>Keep me signed in</Text>
+          <View style={styles.signInWrap}>
+            <Text style={styles.signInText}>Already have an account? <Text style={styles.signInLink}>Sign in</Text></Text>
           </View>
-        </View>
 
-        <View style={styles.actions}>
-          <AuthButton label="Continue" isLoading={loadingAction === 'continue'} onPress={handleContinue} />
-          <AuthButton
-            label="Send magic link"
-            variant="secondary"
-            isLoading={loadingAction === 'magic-link'}
-            onPress={handleMagicLink}
-            icon={<Feather name="mail" color={theme.colors.text} size={24} />}
-          />
+          <AuthFooter />
         </View>
-
-        <View style={styles.dividerWrap}>
-          <View style={styles.dividerLine} />
-          <Text style={styles.dividerText}>or</Text>
-          <View style={styles.dividerLine} />
-        </View>
-
-        <View style={styles.signInWrap}>
-          <Text style={styles.signInText}>Already have an account? <Text style={styles.signInLink}>Sign in</Text></Text>
-        </View>
-
-        <AuthFooter />
-      </View>
+      </TouchableWithoutFeedback>
     </SafeAreaView>
   );
 }
