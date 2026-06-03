@@ -13,6 +13,7 @@ export function BottomNav() {
   const pathname = usePathname();
 
   const isFeedActive = pathname === '/';
+  const isAddActive = pathname.startsWith('/add');
   const isClosetActive = pathname.startsWith('/closet');
 
   return (
@@ -27,11 +28,11 @@ export function BottomNav() {
         <Text style={styles.navText}>Match</Text>
       </Pressable>
 
-      <Pressable accessibilityLabel="Add item" style={styles.addNavItem}>
+      <Pressable accessibilityLabel="Add item" onPress={() => router.push('/add')} style={styles.addNavItem}>
         <View style={styles.addCircle}>
           <Feather name="plus" color={theme.colors.white} size={21} />
         </View>
-        <Text style={styles.activeNavText}>Add</Text>
+        <Text style={isAddActive ? styles.activeNavText : styles.navText}>Add</Text>
       </Pressable>
 
       <Pressable accessibilityLabel="Open closet" onPress={() => router.push('/closet')} style={styles.navItem}>
