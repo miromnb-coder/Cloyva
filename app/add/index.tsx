@@ -12,9 +12,14 @@ import { PricingSection } from '../../src/components/add/PricingSection';
 import { theme } from '../../src/constants/theme';
 
 export default function AddItemScreen() {
+  const [itemTitle, setItemTitle] = useState('Vintage Varsity Jacket');
   const [selectedSize, setSelectedSize] = useState<ItemSize>('M');
   const [selectedCondition, setSelectedCondition] = useState<ItemCondition>('Like New');
   const [selectedOptions, setSelectedOptions] = useState<ListingOption[]>(['borrow', 'sell']);
+  const [borrowPrice, setBorrowPrice] = useState('8');
+  const [salePrice, setSalePrice] = useState('45');
+  const [swapPreferences, setSwapPreferences] = useState('');
+  const [description, setDescription] = useState('Classic vintage varsity jacket with embroidered details. Timeless style.');
 
   const toggleListingOption = (option: ListingOption) => {
     setSelectedOptions((currentOptions) => {
@@ -35,7 +40,7 @@ export default function AddItemScreen() {
   const publishItem = () => {
     Alert.alert(
       'Item published',
-      `Vintage Varsity Jacket is now listed as ${selectedOptions.join(', ')}. Size: ${selectedSize}. Condition: ${selectedCondition}.`,
+      `${itemTitle || 'Untitled item'} is now listed as ${selectedOptions.join(', ')}. Size: ${selectedSize}. Condition: ${selectedCondition}. Borrow: €${borrowPrice || '0'} / day. Sale: €${salePrice || '0'}.`,
     );
   };
 
@@ -46,14 +51,23 @@ export default function AddItemScreen() {
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
         <PhotoUploadSection />
         <BasicDetailsSection
+          itemTitle={itemTitle}
+          onChangeItemTitle={setItemTitle}
           selectedSize={selectedSize}
           onSelectSize={setSelectedSize}
           selectedCondition={selectedCondition}
           onSelectCondition={setSelectedCondition}
         />
         <ListingOptionsSection selectedOptions={selectedOptions} onToggleOption={toggleListingOption} />
-        <PricingSection />
-        <ExtraDetailsSection />
+        <PricingSection
+          borrowPrice={borrowPrice}
+          onChangeBorrowPrice={setBorrowPrice}
+          salePrice={salePrice}
+          onChangeSalePrice={setSalePrice}
+          swapPreferences={swapPreferences}
+          onChangeSwapPreferences={setSwapPreferences}
+        />
+        <ExtraDetailsSection description={description} onChangeDescription={setDescription} />
 
         <View style={styles.publishWrap}>
           <Pressable onPress={publishItem} style={styles.publishButton}>
