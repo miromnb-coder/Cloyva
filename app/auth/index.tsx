@@ -1,5 +1,5 @@
 import Feather from '@expo/vector-icons/Feather';
-import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 
@@ -14,7 +14,7 @@ export default function AuthWelcomeScreen() {
 
   return (
     <SafeAreaView style={styles.screen} edges={['top', 'bottom']}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.content}>
+      <View style={styles.content}>
         <View style={styles.brandWrap}>
           <Text style={styles.logo}>Cloyva</Text>
           <Text style={styles.tagline}>BORROW. BUY. SWAP. STYLE.</Text>
@@ -31,7 +31,7 @@ export default function AuthWelcomeScreen() {
           <AuthButton
             label="Continue with Email"
             onPress={() => router.push('/auth/email')}
-            icon={<Feather name="mail" color={theme.colors.white} size={23} />}
+            icon={<Feather name="mail" color={theme.colors.white} size={22} />}
           />
 
           <AuthButton label="Continue with Google" variant="secondary" icon={<Text style={styles.googleIcon}>G</Text>} />
@@ -48,7 +48,7 @@ export default function AuthWelcomeScreen() {
         </Pressable>
 
         <AuthFooter />
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }
@@ -59,60 +59,60 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.white,
   },
   content: {
-    flexGrow: 1,
+    flex: 1,
     paddingHorizontal: 24,
-    paddingTop: 18,
-    paddingBottom: 18,
+    paddingTop: 15,
+    paddingBottom: 5,
     backgroundColor: theme.colors.white,
   },
   brandWrap: {
     alignItems: 'center',
-    marginBottom: 26,
+    marginBottom: 24,
   },
   logo: {
     color: theme.colors.text,
-    fontSize: 43,
-    lineHeight: 48,
+    fontSize: 42,
+    lineHeight: 45,
     fontWeight: '900',
     letterSpacing: -2,
   },
   tagline: {
-    marginTop: 3,
+    marginTop: 2,
     color: theme.colors.purple,
-    fontSize: 13,
-    lineHeight: 17,
+    fontSize: 12.5,
+    lineHeight: 16,
     fontWeight: '800',
-    letterSpacing: 2.3,
+    letterSpacing: 2.25,
   },
   heroImage: {
     width: '100%',
-    height: 299,
+    height: 274,
     borderRadius: 21,
     backgroundColor: '#f4f3f1',
   },
   copyWrap: {
     alignItems: 'center',
-    paddingTop: 29,
+    paddingTop: 24,
   },
   headline: {
     color: theme.colors.text,
-    fontSize: 29,
-    lineHeight: 36,
+    fontSize: 28,
+    lineHeight: 34,
     fontWeight: '900',
-    letterSpacing: -1.35,
+    letterSpacing: -1.25,
     textAlign: 'center',
   },
   subheadline: {
-    marginTop: 8,
+    marginTop: 7,
     color: theme.colors.mutedText,
-    fontSize: 15.2,
-    lineHeight: 21,
+    fontSize: 15,
+    lineHeight: 20,
     fontWeight: '500',
     textAlign: 'center',
   },
   actions: {
-    gap: 14,
-    paddingTop: 28,
+    gap: 12,
+    paddingTop: 24,
   },
   googleIcon: {
     color: '#4285F4',
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 16,
-    paddingTop: 24,
+    paddingTop: 21,
   },
   dividerLine: {
     flex: 1,
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   },
   signInWrap: {
     alignItems: 'center',
-    paddingTop: 20,
+    paddingTop: 17,
   },
   signInText: {
     color: '#77777c',
