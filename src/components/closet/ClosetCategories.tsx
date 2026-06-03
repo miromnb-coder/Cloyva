@@ -39,8 +39,8 @@ export function ClosetCategories() {
 const styles = StyleSheet.create({
   wrap: {
     height: 62,
-    marginHorizontal: 22,
-    paddingHorizontal: 12,
+    marginHorizontal: 0,
+    paddingHorizontal: 22,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
