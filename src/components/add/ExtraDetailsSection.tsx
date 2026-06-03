@@ -1,7 +1,12 @@
 import Feather from '@expo/vector-icons/Feather';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { theme } from '../../constants/theme';
+
+type ExtraDetailsSectionProps = {
+  description: string;
+  onChangeDescription: (description: string) => void;
+};
 
 function DetailRow({ icon, label, value }: { icon: keyof typeof Feather.glyphMap; label: string; value: string }) {
   return (
@@ -18,7 +23,7 @@ function DetailRow({ icon, label, value }: { icon: keyof typeof Feather.glyphMap
   );
 }
 
-export function ExtraDetailsSection() {
+export function ExtraDetailsSection({ description, onChangeDescription }: ExtraDetailsSectionProps) {
   return (
     <View style={styles.section}>
       <Text style={styles.sectionTitle}>Extra Details</Text>
@@ -26,7 +31,24 @@ export function ExtraDetailsSection() {
       <View style={styles.card}>
         <DetailRow icon="map-pin" label="Location" value="Berlin, Germany" />
         <View style={styles.divider} />
-        <DetailRow icon="file-text" label="Description" value="Classic vintage varsity jacket with embroidered details. Timeless style..." />
+
+        <View style={styles.descriptionRow}>
+          <View style={styles.detailLeft}>
+            <Feather name="file-text" color="#777777" size={13} />
+            <Text style={styles.detailLabel}>Description</Text>
+          </View>
+          <TextInput
+            value={description}
+            onChangeText={onChangeDescription}
+            placeholder="Classic vintage varsity jacket with embroidered details. Timeless style..."
+            placeholderTextColor="#888888"
+            style={styles.descriptionInput}
+            multiline
+            textAlignVertical="center"
+          />
+          <Feather name="chevron-right" color={theme.colors.text} size={17} />
+        </View>
+
         <View style={styles.divider} />
 
         <View style={styles.aiCard}>
@@ -71,6 +93,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  descriptionRow: {
+    minHeight: 52,
+    paddingHorizontal: 11,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   detailLeft: {
     width: 118,
     flexDirection: 'row',
@@ -91,6 +120,16 @@ const styles = StyleSheet.create({
   },
   detailValue: {
     flex: 1,
+    color: theme.colors.text,
+    textAlign: 'right',
+    fontSize: 10.6,
+    lineHeight: 13,
+    fontWeight: '700',
+  },
+  descriptionInput: {
+    flex: 1,
+    minHeight: 44,
+    paddingVertical: 4,
     color: theme.colors.text,
     textAlign: 'right',
     fontSize: 10.6,
