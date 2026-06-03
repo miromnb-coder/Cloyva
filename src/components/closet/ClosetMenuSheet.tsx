@@ -6,8 +6,10 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { theme } from '../../constants/theme';
 import { useAuth } from '../../context/AuthContext';
+import { useMyProfile } from '../../hooks/useMyProfile';
+import { getProfileDisplayUsername } from '../../services/profile';
 
-const avatarImage = 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=85';
+const fallbackAvatarImage = 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=300&q=85';
 
 type ClosetMenuSheetProps = {
   visible: boolean;
@@ -35,6 +37,9 @@ export function ClosetMenuSheet({ visible, onClose }: ClosetMenuSheetProps) {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { user, signOut } = useAuth();
+  const { profile } = useMyProfile();
+  const avatarSource = { uri: profile?.avatar_url || fallbackAvatarImage };
+  const username = getProfileDisplayUsername(profile, user?.email);
 
   const handleSignOut = () => {
     Alert.alert('Sign out', 'Are you sure you want to sign out of Cloyva?', [
@@ -60,13 +65,13 @@ export function ClosetMenuSheet({ visible, onClose }: ClosetMenuSheetProps) {
           <View style={styles.handle} />
 
           <View style={styles.accountRow}>
-            <Image source={{ uri: avatarImage }} style={styles.accountAvatar} />
+            <Image source={avatarSource} style={styles.accountAvatar} />
             <View style={styles.accountCopy}>
               <View style={styles.usernameRow}>
-                <Text style={styles.username}>@its.sofiaa</Text>
-                <Ionicons name="checkmark-circle" color={theme.colors.purple} size={16} />
+                <Text style={styles.username}>{username}</Text>
+                {profile?.is_verified ? <Ionicons name="checkmark-circle" color={theme.colors.purple} size={16} /> : null}
               </View>
-              <Text style={styles.email}>{user?.email ?? 'miromnb@icloud.com'}</Text>
+              <Text style={styles.email}>{user?.email ?? 'Not signed in'}</Text>
             </View>
           </View>
 
@@ -134,6 +139,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#dddddd',
   },
   accountCopy: {
+    flex: 1,
     marginLeft: 14,
   },
   usernameRow: {
