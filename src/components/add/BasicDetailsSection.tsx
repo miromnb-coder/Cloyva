@@ -1,5 +1,5 @@
 import Feather from '@expo/vector-icons/Feather';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { theme } from '../../constants/theme';
 
@@ -7,6 +7,8 @@ export type ItemSize = 'XS' | 'S' | 'M' | 'L';
 export type ItemCondition = 'New' | 'Like New' | 'Good';
 
 type BasicDetailsSectionProps = {
+  itemTitle: string;
+  onChangeItemTitle: (title: string) => void;
   selectedSize: ItemSize;
   onSelectSize: (size: ItemSize) => void;
   selectedCondition: ItemCondition;
@@ -36,13 +38,30 @@ function Chip({ label, active, onPress }: { label: string; active?: boolean; onP
 const sizes: ItemSize[] = ['XS', 'S', 'M', 'L'];
 const conditions: ItemCondition[] = ['New', 'Like New', 'Good'];
 
-export function BasicDetailsSection({ selectedSize, onSelectSize, selectedCondition, onSelectCondition }: BasicDetailsSectionProps) {
+export function BasicDetailsSection({
+  itemTitle,
+  onChangeItemTitle,
+  selectedSize,
+  onSelectSize,
+  selectedCondition,
+  onSelectCondition,
+}: BasicDetailsSectionProps) {
   return (
     <View style={styles.section}>
       <Text style={styles.sectionTitle}>Basic Details</Text>
 
       <View style={styles.card}>
-        <Row label="Item Title" value="Vintage Varsity Jacket" />
+        <View style={styles.row}>
+          <Text style={styles.rowLabel}>Item Title</Text>
+          <TextInput
+            value={itemTitle}
+            onChangeText={onChangeItemTitle}
+            placeholder="Vintage Varsity Jacket"
+            placeholderTextColor="#999999"
+            style={styles.titleInput}
+            returnKeyType="done"
+          />
+        </View>
         <View style={styles.divider} />
         <Row label="Category" value="Jackets" chevron />
         <View style={styles.divider} />
@@ -112,6 +131,15 @@ const styles = StyleSheet.create({
     color: theme.colors.text,
     fontSize: 11.7,
     fontWeight: '700',
+  },
+  titleInput: {
+    flex: 1,
+    marginLeft: 12,
+    paddingVertical: 0,
+    color: theme.colors.text,
+    textAlign: 'right',
+    fontSize: 11.7,
+    fontWeight: '800',
   },
   divider: {
     height: 1,
