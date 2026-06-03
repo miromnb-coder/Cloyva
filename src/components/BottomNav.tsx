@@ -12,13 +12,13 @@ export function BottomNav() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const isFeedActive = pathname === '/';
+  const isFeedActive = pathname === '/feed' || pathname === '/feed/';
   const isAddActive = pathname.startsWith('/add');
   const isClosetActive = pathname.startsWith('/closet');
 
   return (
-    <View style={[styles.bottomNav, { paddingBottom: Math.max(insets.bottom, 6) }]}>
-      <Pressable accessibilityLabel="Open feed" onPress={() => router.push('/')} style={styles.navItem}>
+    <View style={[styles.bottomNav, { paddingBottom: Math.max(insets.bottom, 6) }]}> 
+      <Pressable accessibilityLabel="Open feed" onPress={() => router.push('/feed')} style={styles.navItem}>
         <Feather name="home" color={isFeedActive ? theme.colors.purple : theme.colors.text} size={18} />
         <Text style={isFeedActive ? styles.activeNavText : styles.navText}>Feed</Text>
       </Pressable>
