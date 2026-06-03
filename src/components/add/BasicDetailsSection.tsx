@@ -1,7 +1,17 @@
 import Feather from '@expo/vector-icons/Feather';
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { theme } from '../../constants/theme';
+
+export type ItemSize = 'XS' | 'S' | 'M' | 'L';
+export type ItemCondition = 'New' | 'Like New' | 'Good';
+
+type BasicDetailsSectionProps = {
+  selectedSize: ItemSize;
+  onSelectSize: (size: ItemSize) => void;
+  selectedCondition: ItemCondition;
+  onSelectCondition: (condition: ItemCondition) => void;
+};
 
 function Row({ label, value, chevron }: { label: string; value?: string; chevron?: boolean }) {
   return (
@@ -15,15 +25,18 @@ function Row({ label, value, chevron }: { label: string; value?: string; chevron
   );
 }
 
-function Chip({ label, active }: { label: string; active?: boolean }) {
+function Chip({ label, active, onPress }: { label: string; active?: boolean; onPress: () => void }) {
   return (
-    <View style={[styles.chip, active && styles.activeChip]}>
+    <Pressable onPress={onPress} style={[styles.chip, active && styles.activeChip]}>
       <Text style={[styles.chipText, active && styles.activeChipText]}>{label}</Text>
-    </View>
+    </Pressable>
   );
 }
 
-export function BasicDetailsSection() {
+const sizes: ItemSize[] = ['XS', 'S', 'M', 'L'];
+const conditions: ItemCondition[] = ['New', 'Like New', 'Good'];
+
+export function BasicDetailsSection({ selectedSize, onSelectSize, selectedCondition, onSelectCondition }: BasicDetailsSectionProps) {
   return (
     <View style={styles.section}>
       <Text style={styles.sectionTitle}>Basic Details</Text>
@@ -37,10 +50,9 @@ export function BasicDetailsSection() {
         <View style={styles.optionRow}>
           <Text style={styles.rowLabel}>Size</Text>
           <View style={styles.chipsRow}>
-            <Chip label="XS" />
-            <Chip label="S" />
-            <Chip label="M" active />
-            <Chip label="L" />
+            {sizes.map((size) => (
+              <Chip key={size} label={size} active={selectedSize === size} onPress={() => onSelectSize(size)} />
+            ))}
           </View>
         </View>
 
@@ -49,9 +61,9 @@ export function BasicDetailsSection() {
         <View style={styles.optionRow}>
           <Text style={styles.rowLabel}>Condition</Text>
           <View style={styles.conditionChipsRow}>
-            <Chip label="New" />
-            <Chip label="Like New" active />
-            <Chip label="Good" />
+            {conditions.map((condition) => (
+              <Chip key={condition} label={condition} active={selectedCondition === condition} onPress={() => onSelectCondition(condition)} />
+            ))}
           </View>
         </View>
       </View>
