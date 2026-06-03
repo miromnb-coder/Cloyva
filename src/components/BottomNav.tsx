@@ -43,6 +43,10 @@ export function BottomNav() {
 
 const styles = StyleSheet.create({
   bottomNav: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
     minHeight: 63,
     paddingHorizontal: 30,
     paddingTop: 7,
