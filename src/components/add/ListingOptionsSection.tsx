@@ -1,12 +1,29 @@
 import Feather from '@expo/vector-icons/Feather';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { theme } from '../../constants/theme';
 
-function OptionPill({ label, active, icon }: { label: string; active?: boolean; icon: 'hanger' | 'tag' | 'repeat' }) {
+export type ListingOption = 'borrow' | 'sell' | 'swap';
+
+type ListingOptionsSectionProps = {
+  selectedOptions: ListingOption[];
+  onToggleOption: (option: ListingOption) => void;
+};
+
+function OptionPill({
+  label,
+  active,
+  icon,
+  onPress,
+}: {
+  label: string;
+  active?: boolean;
+  icon: 'hanger' | 'tag' | 'repeat';
+  onPress: () => void;
+}) {
   return (
-    <View style={[styles.optionPill, active && styles.activeOptionPill]}>
+    <Pressable onPress={onPress} style={[styles.optionPill, active && styles.activeOptionPill]}>
       {icon === 'hanger' ? (
         <MaterialCommunityIcons name="hanger" color={active ? theme.colors.purple : theme.colors.text} size={17} />
       ) : (
@@ -18,11 +35,11 @@ function OptionPill({ label, active, icon }: { label: string; active?: boolean; 
           <Feather name="check" color={theme.colors.white} size={9} />
         </View>
       ) : null}
-    </View>
+    </Pressable>
   );
 }
 
-export function ListingOptionsSection() {
+export function ListingOptionsSection({ selectedOptions, onToggleOption }: ListingOptionsSectionProps) {
   return (
     <View style={styles.section}>
       <View style={styles.titleRow}>
@@ -31,9 +48,9 @@ export function ListingOptionsSection() {
       </View>
 
       <View style={styles.optionsRow}>
-        <OptionPill label="Borrow" icon="hanger" active />
-        <OptionPill label="Sell" icon="tag" active />
-        <OptionPill label="Swap" icon="repeat" />
+        <OptionPill label="Borrow" icon="hanger" active={selectedOptions.includes('borrow')} onPress={() => onToggleOption('borrow')} />
+        <OptionPill label="Sell" icon="tag" active={selectedOptions.includes('sell')} onPress={() => onToggleOption('sell')} />
+        <OptionPill label="Swap" icon="repeat" active={selectedOptions.includes('swap')} onPress={() => onToggleOption('swap')} />
       </View>
     </View>
   );
