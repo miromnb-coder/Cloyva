@@ -24,14 +24,14 @@ export function ClosetTabs() {
 const styles = StyleSheet.create({
   wrap: {
     height: 38,
-    marginHorizontal: 22,
-    paddingHorizontal: 18,
+    marginHorizontal: 0,
+    paddingHorizontal: 22,
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'space-between',
     backgroundColor: theme.colors.white,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: 26,
+    borderTopRightRadius: 26,
     borderBottomWidth: 1,
     borderBottomColor: theme.colors.border,
   },
