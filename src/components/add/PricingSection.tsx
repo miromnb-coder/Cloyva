@@ -1,9 +1,25 @@
 import Feather from '@expo/vector-icons/Feather';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { theme } from '../../constants/theme';
 
-export function PricingSection() {
+type PricingSectionProps = {
+  borrowPrice: string;
+  onChangeBorrowPrice: (price: string) => void;
+  salePrice: string;
+  onChangeSalePrice: (price: string) => void;
+  swapPreferences: string;
+  onChangeSwapPreferences: (preferences: string) => void;
+};
+
+export function PricingSection({
+  borrowPrice,
+  onChangeBorrowPrice,
+  salePrice,
+  onChangeSalePrice,
+  swapPreferences,
+  onChangeSwapPreferences,
+}: PricingSectionProps) {
   return (
     <View style={styles.section}>
       <Text style={styles.sectionTitle}>Pricing</Text>
@@ -13,7 +29,15 @@ export function PricingSection() {
           <View style={styles.priceColumn}>
             <Text style={styles.priceLabel}>Borrow Price (per day)</Text>
             <View style={styles.priceInput}>
-              <Text style={styles.priceValue}>€8</Text>
+              <Text style={styles.currencyText}>€</Text>
+              <TextInput
+                value={borrowPrice}
+                onChangeText={onChangeBorrowPrice}
+                keyboardType="numeric"
+                placeholder="8"
+                placeholderTextColor="#999999"
+                style={styles.priceTextInput}
+              />
               <Text style={styles.priceMuted}>/ day</Text>
             </View>
           </View>
@@ -23,7 +47,15 @@ export function PricingSection() {
           <View style={styles.priceColumn}>
             <Text style={styles.priceLabel}>Sale Price</Text>
             <View style={styles.priceInput}>
-              <Text style={styles.priceValue}>€45</Text>
+              <Text style={styles.currencyText}>€</Text>
+              <TextInput
+                value={salePrice}
+                onChangeText={onChangeSalePrice}
+                keyboardType="numeric"
+                placeholder="45"
+                placeholderTextColor="#999999"
+                style={styles.priceTextInput}
+              />
             </View>
           </View>
         </View>
@@ -33,7 +65,14 @@ export function PricingSection() {
         <View style={styles.swapRow}>
           <View style={styles.swapTextWrap}>
             <Text style={styles.swapLabel}>I'm open to swap preferences (optional)</Text>
-            <Text style={styles.swapPlaceholder}>e.g. Sneakers, Denim, Bags</Text>
+            <TextInput
+              value={swapPreferences}
+              onChangeText={onChangeSwapPreferences}
+              placeholder="e.g. Sneakers, Denim, Bags"
+              placeholderTextColor="#888888"
+              style={styles.swapInput}
+              returnKeyType="done"
+            />
           </View>
           <Feather name="chevron-right" color={theme.colors.text} size={17} />
         </View>
@@ -83,12 +122,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    gap: 5,
     borderWidth: 1,
     borderColor: '#e6e6e6',
     backgroundColor: '#ffffff',
   },
-  priceValue: {
+  currencyText: {
+    color: theme.colors.text,
+    fontSize: 12.5,
+    fontWeight: '900',
+  },
+  priceTextInput: {
+    flex: 1,
+    paddingVertical: 0,
     color: theme.colors.text,
     fontSize: 12.5,
     fontWeight: '900',
@@ -121,16 +167,15 @@ const styles = StyleSheet.create({
     fontSize: 10.4,
     fontWeight: '700',
   },
-  swapPlaceholder: {
+  swapInput: {
     marginTop: 7,
     height: 25,
     paddingHorizontal: 9,
-    paddingTop: 5,
+    paddingVertical: 0,
     borderRadius: 7,
-    overflow: 'hidden',
     borderWidth: 1,
     borderColor: '#e6e6e6',
-    color: '#888888',
+    color: theme.colors.text,
     fontSize: 10.5,
     fontWeight: '600',
   },
